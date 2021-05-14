@@ -27,7 +27,7 @@ PATH=$STAGING/src/wx3:$PATH
 
 notify-send "INSTALLING GO LANGUAGE"
 pushd $SRC
-wget https://github.com/johna23-lab/filezilla/raw/master/go1.16.4.linux-amd64.7z
+wget https://github.com/johna23-lab/filezilla/raw/main/go1.16.4.linux-amd64.7z
 7z x go1.16.4.linux-amd64.7z
 popd
 
