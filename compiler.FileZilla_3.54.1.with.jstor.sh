@@ -26,9 +26,9 @@ export LDFLAGS='-L/$STAGING/build/lib/include'
 PATH=$STAGING/src/wx3:$PATH
 
 notify-send "INSTALLING GO LANGUAGE"
-wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz -qO-|tar -C $SRC -xz
-export GOROOT=$SRC/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
+pushd $SRC
+wget https://github.com/johna23-lab/filezilla/raw/master/go1.16.4.linux-amd64.7z
+7z x go1.16.4.linux-amd64.7z
 popd
 
 
@@ -63,8 +63,12 @@ make -j3 install
 popd
 
 notify-send "Building a static version of wxWidgets"
-git clone --branch WX_3_0_BRANCH --single-branch https://github.com/wxWidgets/wxWidgets.git $SRC/wx3
-pushd $SRC/wx3*/
+#git clone --branch WX_3_0_BRANCH --single-branch https://github.com/wxWidgets/wxWidgets.git $SRC/wx3
+pushd $SRC
+wget https://github.com/johna23-lab/filezilla/raw/main/wx3.7z
+7z x $SRC/wx3.7z
+popd
+pushd $SRC/wx3
 ./configure --prefix=$(pwd) --enable-monolithic  --disable-shared --enable-static --enable-unicode --with-libpng=builtin   --with-libjpeg=builtin  --with-libtiff=builtin  --with-zlib=builtin --with-expat=builtin
 make -j3
 popd
@@ -98,11 +102,13 @@ popd
 notify-send "Building UPLINK LIBRARY"
 git clone https://github.com/storj/uplink-c.git $SRC/uplink
 pushd $SRC/uplink
+export GOROOT=$SRC/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
 make install DESTDIR=$OUT
 popd
 
 notify-send "Building Filezilla"
-wget https://sourceforge.net/projects/portableapps/files/Source/FileZilla/FileZilla_3.54.1_src.tar.bz2 -qO-|tar -C $SRC -xj
+wget https://github.com/johna23-lab/filezilla/raw/main/FileZilla_3.54.1_src.txz -qO-|tar -C $SRC -xJ
 pushd $SRC/filezilla*/
 ./configure --prefix="$OUT" --enable-static --disable-shared --with-pugixml=builtin --enable-storj 
 make -j3 install
