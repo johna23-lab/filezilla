@@ -1,5 +1,5 @@
 #!/bin/bash
-#Compiler FileZilla_3.60.1 with storj by KAPITALSIN 2022 B04062022
+#Compiler FileZilla_3.60.1 with storj by KAPITALSIN 2022 B26062022
 #sudo apt-get git subversion 
 #https://tecadmin.net/install-go-on-ubuntu/
 #sudo add-apt-repository ppa:ubuntu-toolchain-r/test
@@ -46,9 +46,9 @@
 # The script stripes the binaries saving more than 240 MB
 # Informs of the free space that is required for the compilation
 #
+clear
 glibc="$(ldd --version | awk '/ldd/{print $NF}')"
 
-clear
 gcc_ins (){
 echo "INSTALLING NEW GCC"
 sudo apt-get install software-properties-common
